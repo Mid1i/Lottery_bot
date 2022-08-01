@@ -30,8 +30,7 @@ async def raffle_command(message: types.Message):
     else:
         lotrout.lottery_message(lottery=lottery)
         try:
-            photo = "https://akket.com/wp-content/uploads/2017/08/Apple-iPhone-8-iPhone-X-Edition-42.jpg"
-            #photo = f"https://go.telegiv.com/static/images/draws/{customer_id}.{bot_id}.{raffle_id}.jpeg"
+            photo = f"https://go.telegiv.com/static/images/draws/{customer_id}.{bot_id}.{raffle_id}.jpeg"
             return await message.answer_photo(photo, f"<b>{lottery[8]} 🔥</b>\n\n<b>Главные призы розыгрыша:\n{lotrout.main_prize}</b>\n\n<b>Описание розыгрыша 📝</b>\n{lottery[4]}\n\n<b>Дата окончания розыгрыша {datetime.strftime(lottery[7], '%d.%m.%Y в %H:%M')}</b>",
             reply_markup=keyboard)
         except:
