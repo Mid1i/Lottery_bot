@@ -13,7 +13,7 @@ sys.path.insert(0, parentdir)
 import database.users_db as db
 import database.lottery_db as lot_db
 
-#from variables import end_timestamp
+from variables import end_timestamp
 from functions.check import Checking
 from filters.during_sub import DuringSub2
 from functions.message_routins import Routins
@@ -39,13 +39,13 @@ async def in_call_back(call: types.CallbackQuery):
     await Routins.edit_callback(call=call)
     lottery = await lot_db.lottery_exists()
     lotrout.lottery_message(lottery=lottery)
-    #if (datetime.now() + timedelta(minutes=30)) < end_timestamp:
-        #scheduler.add_job(check.thirty_minutes, "date", run_date=(datetime.now() + timedelta(minutes=30)), args=(call.from_user.id,))
-    #if (datetime.now() + timedelta(hours=2)) < end_timestamp:    
-        #scheduler.add_job(check.two_hours, "date", run_date=(datetime.now() + timedelta(hours=2)), args=(call.from_user.id,))
+    if (datetime.now() + timedelta(minutes=30)) < end_timestamp:
+        scheduler.add_job(check.thirty_minutes, "date", run_date=(datetime.now() + timedelta(minutes=30)), args=(call.from_user.id,))
+    if (datetime.now() + timedelta(hours=2)) < end_timestamp:    
+        scheduler.add_job(check.two_hours, "date", run_date=(datetime.now() + timedelta(hours=2)), args=(call.from_user.id,))
             
-    #scheduler.add_job(check.three_days, "date", run_date=(end_timestamp - timedelta(days=3)), args=(call.from_user.id, lotrout.main_prize,))
-    #scheduler.add_job(check.today, "date", run_date=(end_timestamp - timedelta(hours=24)), args=(call.from_user.id, str(lottery[3]),))
+    scheduler.add_job(check.three_days, "date", run_date=(end_timestamp - timedelta(days=3)), args=(call.from_user.id, lotrout.main_prize,))
+    scheduler.add_job(check.today, "date", run_date=(end_timestamp - timedelta(hours=24)), args=(call.from_user.id, str(lottery[3]),))
 
 
 @dp.callback_query_handler(text="lets_fix")
