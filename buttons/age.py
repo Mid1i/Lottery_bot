@@ -1,5 +1,4 @@
 from aiogram import types
-import asyncio
 
 import os
 import sys
